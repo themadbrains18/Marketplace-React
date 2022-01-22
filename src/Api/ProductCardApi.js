@@ -1,50 +1,44 @@
 export const ProductCardApI = [
     {
         id: "0",
-        url: "find-dasdsf",
-        ImgSrc: "find-jib-img.png",
+        url: "cowork",
+        ImgSrc: "cowork/cowork-img1.png",
         ImgAlt: "Despription",
-        WebpSrc: "find-jib-img.webp",
+        WebpSrc: "cowork/cowork-img1.webp",
         logoUrl: "thumnails.svg",
         heading: "Find Job App Ui kit",
         cardType: "Mobile App Design",
         makeIn: ["xd", "figma"],
-        free: "true"
+        free: "true",
+        type:"UIKitBundle",
+        description:"Best Co-working Space Finder UI Template"
     },
     {
         id: "1",
-        url: "find-32131232",
-        ImgSrc: "find-jib-img.png",
+        url: "skilify",
+        ImgSrc: "skilify-education/skilify-education-img1.jpg",
         ImgAlt: "Despription",
-        WebpSrc: "find-jib-img.webp",
+        WebpSrc: "skilify-education/skilify-education-img1.webp",
         logoUrl: "thumnails.svg",
         heading: "Find Job App Ui kit",
         cardType: "Mobile App Design",
         makeIn: ["xd", "figma"],
-        free: "true"
+        free: "true",
+        type:"UIKitBundle",
+        description:"Skilify For Education & Learning Management System"
     },
     {
         id: "2",
-        url: "find-job",
-        ImgSrc: "find-jib-img.png",
+        url: "barber",
+        ImgSrc: "barber-shop/barber-shop-img1.png",
         ImgAlt: "Despription",
-        WebpSrc: "find-jib-img.webp",
+        WebpSrc: "barber-shop/barber-shop-img1.webp",
         logoUrl: "thumnails.svg",
         heading: "Find Job App Ui kit",
         cardType: "Mobile App Design",
         makeIn: ["xd", "figma"],
-        free: "true"
-    },
-    {
-        id: "3",
-        url: "find-job",
-        ImgSrc: "find-jib-img.png",
-        ImgAlt: "Despription",
-        WebpSrc: "find-jib-img.webp",
-        logoUrl: "thumnails.svg",
-        heading: "Find Job App Ui kit dfsdjfsdjfh",
-        cardType: "Mobile App Design",
-        makeIn: ["xd", "figma"],
-        free: "true"
+        free: "true",
+        type:"UIKitBundle",
+        description:"Barber Is A Mobile Platform For Barbers And Clients Modernizing"
     }
 ]

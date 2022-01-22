@@ -151,13 +151,13 @@
 }
 /* popupslider */
 
-.sec__popupslider__inner {
-  // position: fixed;
-  // height: 100%;
-  // left: 0;
-  // top: 50%;
-  // transform: translateY(-50%);
+.sec__popupslider__inner.active {
+  position: fixed;
   height: 100%;
+  left: 0;
+  top: 10px;
+  transform: translateY(-50%);
+  // height: 100%;
   overflow-y: scroll;
   display: grid;
   place-items: center;
@@ -165,10 +165,9 @@
 .sec__popupslider {
   top: 0;
   left: 50%;
-  transform: translateX(-50%);
   height: 100%;
   z-index: 1043;
-  position: fixed;
+  position: relative;
   overflow-y: scroll;
   img {
     width: 100%;
@@ -618,4 +617,18 @@ input#password:focus {
 
 .close-popup-slider-btn svg {
   display: flex;
+}
+
+.mySwiperPreview{
+    overflow-y: auto;
+}
+
+.mySwiperPreview::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.mySwiperPreview {
+-ms-overflow-style: none;  /* IE and Edge */
+scrollbar-width: none;  /* Firefox */
 }

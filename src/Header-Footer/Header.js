@@ -2,9 +2,9 @@ import React from "react";
 import logo from "../assets/svg/logo.svg";
 
 
-let Header = () => {
+let Header = (props) => {
     return (
-        <header>
+        <header style={{display : props.display== true ? 'none' : 'block'}}>
             <div className="container">
                 <div className="header-wrapper">
                     <div className="logo-wrapper">
@@ -14,19 +14,20 @@ let Header = () => {
                     </div>
                     <ul className="nav-items">
                         <li className="nav-item">
-                             <a className="nav-link" href="/">Mobile app</a>
-                             </li>
-                        <li className="nav-item"> 
-                            <a className="nav-link" href="/website">Website</a>
+                            <a className="nav-link" href="/webportal">Website</a>
+
                         </li>
-                        <li className="nav-item"> 
+                        <li className="nav-item">
+                            <a className="nav-link" href="/mobileportal">Mobile app</a>
+                        </li>
+                        <li className="nav-item">
                             <a className="nav-link" href="/">Free Design</a>
                         </li>
-                        <li className="nav-item"> 
-                            <a className="nav-link" href="/">Log in</a>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/login">Log in</a>
                         </li>
                     </ul>
-                    <a className="nav-btn" href="/">Sign up Free</a>
+                    <a className="nav-btn" href="/create-account">Sign up Free</a>
                     <div className="toggle">
                         <svg className="toggle-svg" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M27 5H3V7.63158H27V5Z" fill="#565656"></path>

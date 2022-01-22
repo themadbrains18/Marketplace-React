@@ -7,7 +7,7 @@ let ProductCard = (props) => {
         );
     }
     return (
-            <div className="card-body" onClick={click} key={props.id} url={props.url} >
+            <div className="card-body" style={{cursor:'pointer'}} onClick={click} key={props.id} url={props.url} >
                 <picture>
                     <img  src={require(`../assets/img/${props.ImgSrc}`).default} alt={props.ImgAlt} loading="lazy" />
                 </picture>

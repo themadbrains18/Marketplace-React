@@ -4,8 +4,11 @@ import {BrowserRouter,Switch,Route,Redirect} from "react-router-dom";
 
 
 import Home from './component/index-page';
-import IndexBanner from './component/IndexBanner';
 import ProductDetail from './component/ProductDetail';
+import CreateAccount from './component/CreateAccount';
+import Login from './component/Login';
+import WebPortal from './component/WebPortal';
+import MobilePortal from './component/MobilePortal';
 import './assets/font/helvetica-neue/stylesheet.css';
 import './assets/font/proxima-nova/stylesheet.css';
 import './assets/scss/style.scss';
@@ -23,8 +26,12 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact strict path="/" component={()=><Home Clicked={ClickedEvent}></Home>}></Route>
-          <Route exact strict path="/website" component={IndexBanner}></Route>
-          <Route path="/:slug" component={ProductDetail}></Route>
+          <Route exact strict path="/create-account" component={CreateAccount}></Route>
+          <Route exact strict path="/login" component={Login}></Route>
+          <Route exact strict path="/webportal" component={WebPortal}></Route>
+          <Route exact strict path="/mobileportal" component={MobilePortal}></Route>
+          <Route path= {"/ProductDetail/:slug"}  component={ProductDetail}></Route>
+          
           <Redirect to="/" />
         </Switch>
       </BrowserRouter>
