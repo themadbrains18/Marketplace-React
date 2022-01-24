@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useParams } from "react-router-dom";
 import { Swiper } from 'swiper/react/swiper.js';
 import { SwiperSlide } from 'swiper/react/swiper-slide.js';
@@ -8,6 +8,9 @@ import { ProductDetailApi } from '../Api/ProductDetailApi';
 import { ProductPreviewApi } from '../Api/ProductPreviewApi';
 import { ProductCardApI } from "../Api/ProductCardApi";
 
+import emailjs from '@emailjs/browser';
+import validator from 'validator'
+
 // import Swiper core and required modules
 import SwiperCore, {
     FreeMode, Navigation, Thumbs
@@ -16,6 +19,8 @@ import SwiperCore, {
 // install Swiper modules
 SwiperCore.use([FreeMode, Navigation, Thumbs]);
 
+// var quickemailverification = require('quickemailverification').client('d366d148a398546c5cb9cb0622238c69fbb75d4a6446e7ce4794a6e765c5').quickemailverification();
+
 const ProductDetail = (props) => {
 
     const [SharePopup, setSharePopup] = useState(false);
@@ -23,28 +28,30 @@ const ProductDetail = (props) => {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const [previewPopup, setPreviewPopup] = useState(false);
     const [downloadPopup, setDownloadPopup] = useState(false);
+    const [validateMsg, setValidateMsg] = useState('');
+    
+    /* {Get url variable} */
     const { slug } = useParams();
+
     const height = window.innerHeight - 20;
 
+    /* {Preview section start} */
     let Product = ProductCardApI.filter(item => item.url == slug);
 
+    /* {Filter product slider from APi } */
     let productList = ProductDetailApi[slug];
+
+    /* {Filter product preview from API} */
     let ProductPreviewList = ProductPreviewApi[slug];
 
+    /* Handle swipper popup */
     let openPopup = (event) => {
-
-        // if(event.target.className !== 'swiper-button-next' && event.target.className !== 'swiper-button-prev' && event.target.className !== 'subSliderimage'){
-        //     if(sliderPopup == true){
-        //         setSliderPopup(false);    
-        //     }
-        //     else{
-        //         setSliderPopup(true);
-        //     }
-        // }
 
         if (event.target.classList.length === 0 || event.target.classList.value === 'swiper-slide swiper-slide-active') {
             if (sliderPopup == true) {
-                setSliderPopup(false);
+                if (event.target.tagName == 'svg') {
+                    setSliderPopup(false);
+                }
             }
             else {
                 setSliderPopup(true);
@@ -52,6 +59,43 @@ const ProductDetail = (props) => {
         }
 
     }
+
+    const form = useRef();
+
+    /* Send Email function start */
+    const sendEmail = (e) => {
+        e.preventDefault();
+
+        /* Get Email from form field */
+        var email = form.current.user_email.value;
+
+        /* Validate email using validator */
+        if (validator.isEmail(email)) {
+            setValidateMsg('');
+            console.log(email);
+        }
+        else {
+            setValidateMsg('Please Enter Valid Email');
+            return;
+        }
+
+        /* Add hidden field custom data  */
+        form.current.subject.value = 'Market Place Template';
+        form.current.message.value = 'https://theuxuidesigner.com/market-place';
+        form.current.fromname.value = 'The Mad Brains';
+
+        /* Send Email Using emailJs */
+        emailjs.sendForm('gmail', 'template_qoux7yb', form.current, 'user_HBHLwXqJnN08QuMgqKEJo')
+            .then((result) => {
+                console.log(result.text);
+                setValidateMsg('Email has been sent!');
+            }, (error) => {
+                console.log(error.text);
+                setValidateMsg('Some error in email sent');
+            });
+        /* Send Email End */
+    };
+    /* Send Email End */
 
     return (
         <>
@@ -64,7 +108,7 @@ const ProductDetail = (props) => {
 
                     <div className="sec-content">
                         <div className="slider-wrapper">
-                            <div className="popup-slider-tmb" style={{ display: sliderPopup == true ? 'block' : 'none' }}></div>
+                            <div className="popup-slider-tmb" style={{ display: sliderPopup == true ? 'block' : 'none' }} onClick={() => { setSliderPopup(false) }}></div>
                             <div className={'slider-wrapper-inner ' + (sliderPopup == true ? 'active' : '')} onClick={(event) => { openPopup(event) }}>
                                 <button className='close-popup-slider-btn'>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -176,7 +220,7 @@ const ProductDetail = (props) => {
 
                     <div className="sec__popupslider" style={{ display: previewPopup == true ? 'block' : 'none' }}>
                         <div className="slider-wrapper">
-                            <div className="sec__popupslider__tmb" style={{ display: previewPopup == true ? 'block' : 'none' }}></div>
+                            <div className="sec__popupslider__tmb" style={{ display: previewPopup == true ? 'block' : 'none' }} onClick={() => { setPreviewPopup(false) }}></div>
                             <div className={'slider-wrapper-inner ' + (previewPopup == true ? 'active' : '')} >
                                 <button className='close-popup-slider-btn' onClick={() => { setPreviewPopup(false) }}>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -197,42 +241,6 @@ const ProductDetail = (props) => {
                                             </SwiperSlide>
                                         );
                                     })}
-                                    {/* <SwiperSlide className="swiper-slide">
-                                        <picture>
-                                            <source srcSet={require("../assets/webp/skilify-education/preview/skilify-img1.webp").default} type="image/webp" />
-                                            <img src={require("../assets/img/skilify-education/preview/skilify-img1.jpg").default} alt="image-description" loading="lazy" />
-                                        </picture>
-                                    </SwiperSlide>
-                                    <SwiperSlide className="swiper-slide">
-                                        <picture>
-                                            <source srcSet={require("../assets/webp/skilify-education/preview/skilify-img2.webp").default} type="image/webp" />
-                                            <img src={require("../assets/img/skilify-education/preview/skilify-img2.jpg").default} alt="image-description" loading="lazy" />
-                                        </picture>
-                                    </SwiperSlide>
-                                    <SwiperSlide className="swiper-slide">
-                                        <picture>
-                                            <source srcSet={require("../assets/webp/skilify-education/preview/skilify-img3.webp").default} type="image/webp" />
-                                            <img src={require("../assets/img/skilify-education/preview/skilify-img3.jpg").default} alt="image-description" loading="lazy" />
-                                        </picture>
-                                    </SwiperSlide>
-                                    <SwiperSlide className="swiper-slide">
-                                        <picture>
-                                            <source srcSet={require("../assets/webp/skilify-education/preview/skilify-img4.webp").default} type="image/webp" />
-                                            <img src={require("../assets/img/skilify-education/preview/skilify-img4.jpg").default} alt="image-description" loading="lazy" />
-                                        </picture>
-                                    </SwiperSlide>
-                                    <SwiperSlide className="swiper-slide">
-                                        <picture>
-                                            <source srcSet={require("../assets/webp/skilify-education/preview/skilify-img5.webp").default} type="image/webp" />
-                                            <img src={require("../assets/img/skilify-education/preview/skilify-img5.jpg").default} alt="image-description" loading="lazy" />
-                                        </picture>
-                                    </SwiperSlide>
-                                    <SwiperSlide className="swiper-slide">
-                                        <picture>
-                                            <source srcSet={require("../assets/webp/skilify-education/preview/skilify-img6.webp").default} type="image/webp" />
-                                            <img src={require("../assets/img/skilify-education/preview/skilify-img6.jpg").default} alt="image-description" loading="lazy" />
-                                        </picture>
-                                    </SwiperSlide> */}
 
                                 </Swiper>
                             </div>
@@ -247,7 +255,7 @@ const ProductDetail = (props) => {
                         <div className="popup" style={{ display: 'block' }}>
                             <div className="popup__wrapper" onClick={() => { setSharePopup(false) }}></div>
                             <div className="social__share__popup" style={{ display: 'block' }}>
-                                <div className="social__share__popup__inner"> <img src={require("../assets/img/cowork/cowork-img1.png").default} alt="img-description" /></div>
+                                <div className="social__share__popup__inner"> <img src={require("../assets/img/" + Product[0].ImgSrc).default} alt="img-description" /></div>
                                 <div className="sec__content">
                                     <div className="sec__heading">Share this with your social Community</div>
                                     <div className="sec__icon">
@@ -293,18 +301,32 @@ const ProductDetail = (props) => {
                         <div className="popup" style={{ display: 'block' }}>
                             <div className="popup__wrapper" onClick={() => { setDownloadPopup(false) }}></div>
                             <div className="social__share__popup" style={{ display: 'block' }}>
-                                <div className="social__share__popup__inner"> <img src={require("../assets/img/cowork/cowork-img1.png").default} alt="img-description" /></div>
+                                <div className="social__share__popup__inner"> <img src={require("../assets/img/" + Product[0].ImgSrc).default} alt="img-description" /></div>
                                 <div className="sec__content">
-                                    <div class="email">
-                                        <input id="name" type="text" name="email" required="" />
-                                        <label class="email__label" for="name">Full name</label>
+                                    <div style={{ marginBottom: "25px" }}>
+                                        <p style={{ color: 'red' }} className="msg__label" id="validate_msg">{validateMsg}</p>
                                     </div>
-                                    <div class="email">
-                                        <input id="Username" type="text" name="email" required="" />
-                                        <label class="email__label" for="Username">Username</label>
-                                    </div>
-                                    <input class="form__btn" type="submit" value="Download"></input>
+                                    <form ref={form} onSubmit={sendEmail}>
 
+                                        <div className="email">
+                                            <input id="name" type="text" name="to_name" required />
+                                            <label className="name__label" htmlFor="name">Full name</label>
+                                        </div>
+                                        <div className="email">
+                                            <input id="Username" type="email" name="user_email" required />
+                                            <label className="email__label" htmlFor="Username">E-Mail</label>
+                                        </div>
+                                        <div className="email">
+                                            <input id="subject" type="hidden" name="subject" />
+                                        </div>
+                                        <div className="email">
+                                            <input id="message" type="hidden" name="message" />
+                                        </div>
+                                        <div className="email">
+                                            <input id="fromname" type="hidden" name="from_name" />
+                                        </div>
+                                        <input className="form__btn" type="submit" value="Download"></input>
+                                    </form>
                                 </div>
                             </div>
                         </div> : null}
