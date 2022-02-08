@@ -1,12 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import { Swiper } from 'swiper/react/swiper.js';
 import { SwiperSlide } from 'swiper/react/swiper-slide.js';
 import Header from '../Header-Footer/Header';
 import Footer from '../Header-Footer/Footer';
-import { ProductDetailApi } from '../Api/ProductDetailApi';
-import { ProductPreviewApi } from '../Api/ProductPreviewApi';
-import { ProductCardApI } from "../Api/ProductCardApi";
 
 import emailjs from '@emailjs/browser';
 import validator from 'validator'
@@ -16,10 +13,12 @@ import SwiperCore, {
     FreeMode, Navigation, Thumbs
 } from 'swiper';
 
+const axios = require("axios");
+const { apiurl } = require('../config');
+const { imageUrl } = require('../config');
+
 // install Swiper modules
 SwiperCore.use([FreeMode, Navigation, Thumbs]);
-
-// var quickemailverification = require('quickemailverification').client('d366d148a398546c5cb9cb0622238c69fbb75d4a6446e7ce4794a6e765c5').quickemailverification();
 
 const ProductDetail = (props) => {
 
@@ -29,20 +28,32 @@ const ProductDetail = (props) => {
     const [previewPopup, setPreviewPopup] = useState(false);
     const [downloadPopup, setDownloadPopup] = useState(false);
     const [validateMsg, setValidateMsg] = useState('');
-    
-    /* {Get url variable} */
-    const { slug } = useParams();
+    const [ProductItem, setProductItem] = useState([]);
+    const [productList, setproductList] = useState([]);
+    const [ProductPreviewList, setProductPreviewList] = useState([]);
+    const [ProductHighlightList, setProductHighlightList] = useState([]);
+
+    useEffect(async () => {
+        getProductById();
+    }, []);
+
+    // get Product List data from API
+    async function getProductById() {
+        let productid = props.match.params.slug;
+        try {
+            const response = await axios.get(apiurl + `product/getproductbyid/${productid}`);
+            setProductItem(response.data.product);
+            setproductList(response.data.productslider);
+            setProductPreviewList(response.data.productPreview);
+            setProductHighlightList(response.data.product.highlight.split('</p><p>'));
+            console.log(response)
+
+        } catch (e) {
+            console.error(e);
+        }
+    };
 
     const height = window.innerHeight - 20;
-
-    /* {Preview section start} */
-    let Product = ProductCardApI.filter(item => item.url == slug);
-
-    /* {Filter product slider from APi } */
-    let productList = ProductDetailApi[slug];
-
-    /* {Filter product preview from API} */
-    let ProductPreviewList = ProductPreviewApi[slug];
 
     /* Handle swipper popup */
     let openPopup = (event) => {
@@ -123,8 +134,8 @@ const ProductDetail = (props) => {
                                         return (
                                             <SwiperSlide className="swiper-slide">
                                                 <picture>
-                                                    <source srcSet={require("../assets/webp/" + val.WebpSrc).default} type="image/webp" />
-                                                    <img src={require("../assets/img/" + val.ImgSrc).default} alt="img-description" loading="lazy" />
+                                                    {/* <source srcSet={require("../assets/webp/" + val.WebpSrc).default} type="image/webp" /> */}
+                                                    <img src={imageUrl + val.image} alt="img-description" loading="lazy" />
                                                 </picture>
                                             </SwiperSlide>
                                         );
@@ -136,8 +147,8 @@ const ProductDetail = (props) => {
                                         return (
                                             <SwiperSlide className="swiper-slide">
                                                 <picture>
-                                                    <source srcSet={require("../assets/webp/" + val.WebpSrc).default} type="image/webp" />
-                                                    <img src={require("../assets/img/" + val.ImgSrc).default} alt="img-description" className='subSliderimage' loading="lazy" />
+                                                    {/* <source srcSet={require("../assets/webp/" + val.WebpSrc).default} type="image/webp" /> */}
+                                                    <img src={imageUrl + val.image} alt="img-description" className='subSliderimage' loading="lazy" />
                                                 </picture>
                                             </SwiperSlide>
                                         );
@@ -147,7 +158,7 @@ const ProductDetail = (props) => {
                             </div>
                         </div>
                         <aside className="sec-txt aside-card" style={{ zIndex: sliderPopup == true ? '0' : '1' }}>
-                            <h2 className="aside-heading">{Product[0].description}</h2>
+                            <h2 className="aside-heading">{ProductItem.title}</h2>
                             <p className="aside-info">By <span>Themadbrains</span></p>
                             <div className="aside-wrapper-btn">
                                 <div className="xd-wrapper">
@@ -158,7 +169,7 @@ const ProductDetail = (props) => {
                                             <tspan x={0} y={0}>Xd</tspan>
                                         </text>
                                     </svg>
-                                    <p>Adobe XD</p>
+                                    <p>{ProductItem.tools!=undefined ?ProductItem.tools.name:''}</p>
                                 </div>
                                 <div className="share-btn shareinow">
                                     <img src={require("../assets/svg/share-icon.svg").default} alt="" />
@@ -184,34 +195,20 @@ const ProductDetail = (props) => {
                         <div className="product-info-content">
                             <div className="product-info-content-inner">
                                 <h2 className="product-info-heading">Overview</h2>
-                                <ul>
-                                    <li className="overview-info">Today Everyone around us is determined to start their own business, startup, and freelancing to escape the traditional 9 to 5 life. But the one thing that is common in most of them is the limited finance and need for a good working place to bring the best out of them, That’s the point when they realize they need a good coworking space at a budget that suits them the best. </li>
-                                    <li className="overview-info">Space Work is the best UI template that can help you to solve this problem, with a clean design that helps you to build your own application to help them find the best modern office space, coworking space, meeting space, workspace place etc. </li>
-                                    <li className="overview-info">Space Work is a unique UI template designed keeping in mind the latest trends and with an aim to simplify it for freelancers, startups, and many others to find the best working space for them. </li>
-                                    <li className="overview-info">This is designed based on extensive UX Research in order to provide the best experience to its users with advanced filtering that helps you to boosts the conversions and increase the properties rented. </li>
-                                    <li className="overview-info">This App is the best fit for anyone that is in the real estate industry or is planning to launch the application based on the idea.</li>
-                                    <li className="overview-info">This Coworking space for freelancer site dashboard design features a unique design. This is designed in the adobe Xd software and is prototype ready so you can feel the website even before getting it developed and provide you with all you will need in order to build you website.</li>
-                                </ul>
+                                <span className='productoverview' dangerouslySetInnerHTML={{ __html: unescape(ProductItem.overview) }}></span>
+
                                 <h2 className="product-info-heading highlights-heading">Highlights</h2>
-                                <div className="highlight-upper"> <div className="highlight"><svg xmlns="http://www.w3.org/2000/svg" width="20.829" height="14.79" viewBox="0 0 20.829 14.79">
-                                    <path className="a" d="M24,9,11.625,21.376,6,15.75" transform="translate(-4.586 -7.586)"></path>
-                                </svg><p className="highlights-txt">All the Fonts that are used during the design process</p></div><div className="highlight"><svg xmlns="http://www.w3.org/2000/svg" width="20.829" height="14.79" viewBox="0 0 20.829 14.79">
+                                {/* <span dangerouslySetInnerHTML={{ __html: unescape(ProductItem.highlight) }}></span> */}
+                                <div className="highlight-upper">
+                                    {ProductHighlightList.map((val, index) => {
+                                        if(index < ProductHighlightList.length-1){
+                                            return <div className="highlight"><svg xmlns="http://www.w3.org/2000/svg" width="20.829" height="14.79" viewBox="0 0 20.829 14.79">
+                                            <path className="a" d="M24,9,11.625,21.376,6,15.75" transform="translate(-4.586 -7.586)"></path>
+                                            </svg><p className="highlights-txt"><span dangerouslySetInnerHTML={{ __html: unescape(val) }}></span></p></div>
+                                        }
+                                    })}
 
-                                    <path className="a" d="M24,9,11.625,21.376,6,15.75" transform="translate(-4.586 -7.586)"></path>
-                                </svg><p className="highlights-txt">All the Icons used in Musify are Free available under a creative</p></div><div className="highlight"><svg xmlns="http://www.w3.org/2000/svg" width="20.829" height="14.79" viewBox="0 0 20.829 14.79">
-
-                                    <path className="a" d="M24,9,11.625,21.376,6,15.75" transform="translate(-4.586 -7.586)"></path>
-                                </svg><p className="highlights-txt">The grid used is the bootstrap grid.</p></div><div className="highlight"><svg xmlns="http://www.w3.org/2000/svg" width="20.829" height="14.79" viewBox="0 0 20.829 14.79">
-
-                                    <path className="a" d="M24,9,11.625,21.376,6,15.75" transform="translate(-4.586 -7.586)"></path>
-                                </svg><p className="highlights-txt">Unique and Professional Presentations</p></div><div className="highlight"><svg xmlns="http://www.w3.org/2000/svg" width="20.829" height="14.79" viewBox="0 0 20.829 14.79">
-
-                                    <path className="a" d="M24,9,11.625,21.376,6,15.75" transform="translate(-4.586 -7.586)"></path>
-                                </svg><p className="highlights-txt">Light &amp; Dark Styles</p></div><div className="highlight"><svg xmlns="http://www.w3.org/2000/svg" width="20.829" height="14.79" viewBox="0 0 20.829 14.79">
-
-                                    <path className="a" d="M24,9,11.625,21.376,6,15.75" transform="translate(-4.586 -7.586)"></path>
-                                </svg><p className="highlights-txt">Customizable Layers, Fonts &amp; Colors</p></div></div>
-
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -235,8 +232,8 @@ const ProductDetail = (props) => {
                                         return (
                                             <SwiperSlide className="swiper-slide">
                                                 <picture>
-                                                    <source srcSet={require("../assets/webp/" + val.WebpSrc).default} type="image/webp" />
-                                                    <img src={require("../assets/img/" + val.ImgSrc).default} alt="image-description" loading="lazy" />
+                                                    {/* <source srcSet={require("../assets/webp/" + val.WebpSrc).default} type="image/webp" /> */}
+                                                    <img src={imageUrl + val.image} alt="image-description" loading="lazy" />
                                                 </picture>
                                             </SwiperSlide>
                                         );
@@ -255,7 +252,7 @@ const ProductDetail = (props) => {
                         <div className="popup" style={{ display: 'block' }}>
                             <div className="popup__wrapper" onClick={() => { setSharePopup(false) }}></div>
                             <div className="social__share__popup" style={{ display: 'block' }}>
-                                <div className="social__share__popup__inner"> <img src={require("../assets/img/" + Product[0].ImgSrc).default} alt="img-description" /></div>
+                                <div className="social__share__popup__inner"> <img src={imageUrl + ProductItem.image} alt="img-description" /></div>
                                 <div className="sec__content">
                                     <div className="sec__heading">Share this with your social Community</div>
                                     <div className="sec__icon">
@@ -272,7 +269,7 @@ const ProductDetail = (props) => {
                                     <div className="shot-share-modal-copy-action">
                                         <label htmlFor="copy-url">or copy link</label>
                                         <div className="shot-share-modal-copy-wrapper">
-                                            <input className="shot-share-modal-copy-input" id="copy-url" type="text" value="https://theuxuidesigner.com/market-place/coworking-space.html" readOnly="readonly" />
+                                            <input className="shot-share-modal-copy-input" id="copy-url" type="text" value={`http://localhost:3001${props.match.url}`} readOnly="readonly" />
                                             <a className="shot-share-modal-copy-link js-share-clipboard" href="/">Copy</a>
                                         </div>
                                     </div>
@@ -301,7 +298,7 @@ const ProductDetail = (props) => {
                         <div className="popup" style={{ display: 'block' }}>
                             <div className="popup__wrapper" onClick={() => { setDownloadPopup(false) }}></div>
                             <div className="social__share__popup" style={{ display: 'block' }}>
-                                <div className="social__share__popup__inner"> <img src={require("../assets/img/" + Product[0].ImgSrc).default} alt="img-description" /></div>
+                                <div className="social__share__popup__inner"> <img src={imageUrl + ProductItem.image} alt="img-description" /></div>
                                 <div className="sec__content">
                                     <div style={{ marginBottom: "25px" }}>
                                         <p style={{ color: 'red' }} className="msg__label" id="validate_msg">{validateMsg}</p>

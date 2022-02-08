@@ -1,10 +1,29 @@
-import React from "react";
+import React,{ useState,useEffect } from "react";
 import  {Swiper} from 'swiper/react/swiper.js';
 import  {SwiperSlide} from 'swiper/react/swiper-slide.js';
 import 'swiper/swiper-bundle.css';
 
+const axios = require("axios");
+const {apiurl}= require('../config');
+const { imageUrl } = require('../config');
 
 let IndexBanner = () => {
+    const[banner,setBanner]=useState([]);
+
+    useEffect(async () => {
+        getBannerData();
+    }, []);
+
+    async function getBannerData(){
+        try{
+            const response = await axios.get(apiurl + "getbanner");
+            console.log(response.data);
+            setBanner(response.data);
+        }catch(e){
+            console.error(e);
+        }
+    }
+
     return (
         <section className="banner-sec banner-v1">
             <div className="container">
@@ -25,8 +44,16 @@ let IndexBanner = () => {
                                 slidesPerView={1}
                                 className="mySwiper"
                             >
-                                
-                                    <SwiperSlide className="swiper-slide">
+                                {banner.map((val, index) => {
+                                        return (
+                                            <SwiperSlide className="swiper-slide">
+                                                <picture>
+                                                    <img src={imageUrl + val.image} alt="img-description" loading="lazy" />
+                                                </picture>
+                                            </SwiperSlide>
+                                        );
+                                    })}
+                                    {/* <SwiperSlide className="swiper-slide">
                                         <picture>
                                             <source srcSet={require('../assets/webp/banner-img.webp').default} type="image/webp" />
                                             <img src={require("../assets/img/banner-img.png").default} alt="image_description" loading="lazy" />
@@ -49,7 +76,7 @@ let IndexBanner = () => {
                                             <source srcSet={require("../assets/webp/banner-img4.webp").default} type="image/webp" />
                                             <img src={require("../assets/img/banner-img4.png").default} alt="image_description" loading="lazy" />
                                         </picture>
-                                    </SwiperSlide>
+                                    </SwiperSlide> */}
                             </Swiper>
                         </div>
                     </div>

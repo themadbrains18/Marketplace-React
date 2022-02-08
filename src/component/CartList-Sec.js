@@ -1,14 +1,35 @@
-import React,{ useState } from "react";
+import React,{ useState,useEffect } from "react";
 import ProductCard from "./ProductCard";
-import { ProductCardApI } from "../Api/ProductCardApi";
 
+const axios = require("axios");
+const {apiurl}= require('../config');
 
 let CartListSec = (props) => {
 
     const [kitType, setKitType] = useState('UIKitBundle');
     const [listCount, setlistCount] = useState(6);
+    const[ProductArray, setProductArray]=useState([]);
 
-    let ProductArray = ProductCardApI.filter(item => item.type == kitType);
+    useEffect(async () => {
+        getAllProduct();
+    }, []);
+
+    
+    // get Product List data from API
+    async function getAllProduct() {
+        try {
+            const response = await axios.get(apiurl + "product/getAll");
+            console.log(response.data);
+            if(response.data.length>0){
+                setProductArray(response.data);
+            }
+            
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
+    
 
     let updateState = (type,event)=>{
         event.preventDefault();
@@ -33,11 +54,12 @@ let CartListSec = (props) => {
                     {ProductArray.map((val,index) => {
                         if(index < listCount){
                             return (
-                                <li key={val.id}>
+                                <li key={val._id}>
                                     <ProductCard  {...val} ClickEvent={props.cardClick} />
                                 </li>
-                            );
+                            );    
                         }
+                        
                     })}
                 </ul>
                 <button style={{display : listCount == ProductArray.length || listCount > ProductArray.length? 'none' : 'block'}} className="load__more" onClick={()=>{setlistCount(listCount + 6)}}>Load More..</button>
