@@ -12,6 +12,8 @@ import validator from 'validator'
 import SwiperCore, {
     FreeMode, Navigation, Thumbs
 } from 'swiper';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const axios = require("axios");
 const { apiurl } = require('../config');
@@ -74,12 +76,12 @@ const ProductDetail = (props) => {
     const form = useRef();
 
     /* Send Email function start */
-    const sendEmail = (e) => {
+    const sendEmail =async  (e) => {
         e.preventDefault();
 
         /* Get Email from form field */
         var email = form.current.user_email.value;
-
+        var name = form.current.to_name.value;
         /* Validate email using validator */
         if (validator.isEmail(email)) {
             setValidateMsg('');
@@ -90,26 +92,18 @@ const ProductDetail = (props) => {
             return;
         }
 
-        /* Add hidden field custom data  */
-        form.current.subject.value = 'Market Place Template';
-        form.current.message.value = 'https://theuxuidesigner.com/market-place';
-        form.current.fromname.value = 'The Mad Brains';
-
-        /* Send Email Using emailJs */
-        emailjs.sendForm('gmail', 'template_qoux7yb', form.current, 'user_HBHLwXqJnN08QuMgqKEJo')
-            .then((result) => {
-                console.log(result.text);
-                setValidateMsg('Email has been sent!');
-            }, (error) => {
-                console.log(error.text);
-                setValidateMsg('Some error in email sent');
-            });
-        /* Send Email End */
+        const response = await axios.post(apiurl +`download`, {"name" : name, "email" : email});
+        if(response.data.status==200){
+            setDownloadPopup(false)
+            toast(response.data.message);
+        }
+        console.log(response);
     };
     /* Send Email End */
 
     return (
         <>
+            <ToastContainer position="bottom-right" />
             <Header display={sliderPopup || previewPopup || downloadPopup == true ? true : false} />
             <section className="banner-sec bg-color banner-v2">
                 <div className="container">

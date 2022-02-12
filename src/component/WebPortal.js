@@ -1,14 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Header from '../Header-Footer/Header';
 import Footer from '../Header-Footer/Footer';
-import { WebPortalApi } from "../Api/WebPortalApi";
+// import { WebPortalApi } from "../Api/WebPortalApi";
+const axios = require("axios");
+const {apiurl, imageUrl}= require('../config');
 
 const WebPortal = () => {
-    const [SharePopup, setSharePopup] = useState(false);
     const [sliderPopup, setSliderPopup] = useState(false);
-    const [thumbsSwiper, setThumbsSwiper] = useState(null);
-    const [previewPopup, setPreviewPopup] = useState(false);
-    const [downloadPopup, setDownloadPopup] = useState(false);
+    const [WebPortalApi,setWebPortalApi]=useState([]);
+
+    useEffect(async () => {
+        getProductBySubcategory();
+    }, []);
+
+    
+    // get Product List data from API
+    async function getProductBySubcategory() {
+        try {
+            const response = await axios.get(apiurl + "product/getAllBySubcategory/61fcb9a88fa711334c1ad944");
+            console.log(response.data);
+            if(response.data.length>0){
+                setWebPortalApi(response.data);
+            }
+            
+        } catch (e) {
+            console.error(e);
+        }
+    };
 
     return (
         <>
@@ -18,7 +36,7 @@ const WebPortal = () => {
                     <div className="tabs">
                         <div className="tags tabs-txt tmb__sec__content" role="tablist" aria-label="Programming Languages">
                             <h2 className="sec-heading">Website</h2>
-                            <div className="item__sort__btn">
+                            {/* <div className="item__sort__btn">
                                 <select>
                                     <option>Sort By</option>
                                     <option>Price-Low to High</option>
@@ -26,7 +44,7 @@ const WebPortal = () => {
                                     <option>Rate/sqft - Low to High</option>
                                     <option>Rate/sqft - High to Low</option>
                                 </select>
-                            </div>
+                            </div> */}
                         </div>
                         <div role="tabpanel" aria-labelledby="js">
                             <div className="card-wrapper">
@@ -35,8 +53,7 @@ const WebPortal = () => {
                                         <a href={val.url} key={index}>
                                             <div className="card-body">
                                                 <picture>
-                                                    <source srcSet={require("../assets/webp/" + val.WebpSrc).default} type="image/webp" />
-                                                    <img src={require("../assets/img/" + val.ImgSrc).default} alt="image-description" loading="lazy" />
+                                                    <img src={imageUrl + val.image} alt="image-description" loading="lazy" />
                                                 </picture>
                                                 <div className="card-footer"><img src={require("../assets/svg/thumnails-14.svg").default}  alt="" />
                                                     <div className="card-txt">

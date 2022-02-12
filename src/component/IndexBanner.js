@@ -53,30 +53,6 @@ let IndexBanner = () => {
                                             </SwiperSlide>
                                         );
                                     })}
-                                    {/* <SwiperSlide className="swiper-slide">
-                                        <picture>
-                                            <source srcSet={require('../assets/webp/banner-img.webp').default} type="image/webp" />
-                                            <img src={require("../assets/img/banner-img.png").default} alt="image_description" loading="lazy" />
-                                        </picture>
-                                    </SwiperSlide>
-                                    <SwiperSlide className="swiper-slide">
-                                        <picture>
-                                            <source srcSet={require("../assets/webp/banner-img2.webp").default} type="image/webp" />
-                                            <img src={require("../assets/img/banner-img2.png").default} alt="image_description" loading="lazy" />
-                                        </picture>
-                                    </SwiperSlide>
-                                    <SwiperSlide className="swiper-slide">
-                                        <picture>
-                                            <source srcSet={require("../assets/webp/banner-img3.webp").default} type="image/webp" />
-                                            <img src={require("../assets/img/banner-img3.png").default} alt="image_description" loading="lazy" />
-                                        </picture>
-                                    </SwiperSlide>
-                                    <SwiperSlide className="swiper-slide">
-                                        <picture>
-                                            <source srcSet={require("../assets/webp/banner-img4.webp").default} type="image/webp" />
-                                            <img src={require("../assets/img/banner-img4.png").default} alt="image_description" loading="lazy" />
-                                        </picture>
-                                    </SwiperSlide> */}
                             </Swiper>
                         </div>
                     </div>

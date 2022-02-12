@@ -1,16 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../Header-Footer/Header';
 import Footer from '../Header-Footer/Footer';
 import { MobilePortalApi } from "../Api/MobilePortalApi";
+const axios = require("axios");
+const {apiurl, imageUrl}= require('../config');
 
 const MobilePortal = () => {
-    const [SharePopup, setSharePopup] = useState(false);
     const [sliderPopup, setSliderPopup] = useState(false);
-    const [thumbsSwiper, setThumbsSwiper] = useState(null);
-    const [previewPopup, setPreviewPopup] = useState(false);
-    const [downloadPopup, setDownloadPopup] = useState(false);
+    const [MobilePortalApi,setMobilePortalApi]=useState([]);
 
-    var array = [1, 2, 3, 4, 5, 6];
+    useEffect(async () => {
+        getProductBySubcategory();
+    }, []);
+
+    
+    // get Product List data from API
+    async function getProductBySubcategory() {
+        try {
+            const response = await axios.get(apiurl + "product/getAllBySubcategory/61fcbb7edd5a7721d0c741ff");
+            console.log(response.data);
+            if(response.data.length>0){
+                setMobilePortalApi(response.data);
+            }
+            
+        } catch (e) {
+            console.error(e);
+        }
+    };
+    
 
     return (
         <>
@@ -20,7 +37,7 @@ const MobilePortal = () => {
                     <div className="tabs">
                         <div className="tags tabs-txt tmb__sec__content" role="tablist" aria-label="Programming Languages">
                             <h2 className="sec-heading">Mobile</h2>
-                            <div className="item__sort__btn">
+                            {/* <div className="item__sort__btn">
                                 <select>
                                     <option>Sort By</option>
                                     <option>Price-Low to High</option>
@@ -28,7 +45,7 @@ const MobilePortal = () => {
                                     <option>Rate/sqft - Low to High</option>
                                     <option>Rate/sqft - High to Low</option>
                                 </select>
-                            </div>
+                            </div> */}
                         </div>
                         <div role="tabpanel" aria-labelledby="js">
                             <div className="card-wrapper">
@@ -38,8 +55,7 @@ const MobilePortal = () => {
                                         <a href={val.url}>
                                             <div class="card-body">
                                                 <picture>
-                                                    <source srcset={require("../assets/webp/" + val.WebpSrc).default} type="image/webp" />
-                                                    <img src={require("../assets/img/" + val.ImgSrc).default} alt="image-description" loading="lazy" />
+                                                    <img src={imageUrl + val.image} alt="image-description" loading="lazy" />
                                                 </picture>
                                                 <div class="card-footer"><img src={require("../assets/svg/thumnails-5.svg").default} alt="" />
                                                     <div class="card-txt">
