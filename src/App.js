@@ -28,8 +28,8 @@ function App() {
           <Route exact strict path="/" component={()=><Home Clicked={ClickedEvent}></Home>}></Route>
           <Route exact strict path="/create-account" component={CreateAccount}></Route>
           <Route exact strict path="/login" component={Login}></Route>
-          <Route exact strict path="/#/webportal" component={WebPortal}></Route>
-          <Route exact strict path="/#/mobileportal" component={MobilePortal}></Route>
+          <Route exact strict path="#/webportal" component={WebPortal}></Route>
+          <Route exact strict path="#/mobileportal" component={MobilePortal}></Route>
           <Route path= {"/ProductDetail/:slug"}  component={ProductDetail}></Route>
           
           <Redirect to="/" />
