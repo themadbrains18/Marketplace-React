@@ -1,5 +1,5 @@
 import React , {useState}from 'react';
-import {BrowserRouter,Switch,Route,Redirect} from "react-router-dom";
+import {BrowserRouter,Switch,Route,Redirect,HashRouter} from "react-router-dom";
 
 
 
@@ -23,7 +23,7 @@ function App() {
   
   return (
     <>
-      <BrowserRouter>
+      <HashRouter>
         <Switch>
           <Route exact strict path="/" component={()=><Home Clicked={ClickedEvent}></Home>}></Route>
           <Route exact strict path="/create-account" component={CreateAccount}></Route>
@@ -34,7 +34,7 @@ function App() {
           
           <Redirect to="/" />
         </Switch>
-      </BrowserRouter>
+      </HashRouter>
     </>
   );
 }
