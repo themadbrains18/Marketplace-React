@@ -30,11 +30,11 @@ let Header = (props) => {
                     </div>
                     <ul className="nav-items">
                         <li className="nav-item">
-                            <a className="nav-link" href="/Marketplace-React/#/webportal">Website</a>
+                            <a className="nav-link" href="/#/webportal">Website</a>
 
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/Marketplace-React/#/mobileportal">Mobile app</a>
+                            <a className="nav-link" href="/#/mobileportal">Mobile app</a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="/">Free Design</a>
