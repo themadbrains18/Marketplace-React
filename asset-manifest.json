@@ -1,0 +1,41 @@
+{
+  "files": {
+    "main.css": "/Marketplace-React/static/css/main.b3371058.chunk.css",
+    "main.js": "/Marketplace-React/static/js/main.1765e90e.chunk.js",
+    "main.js.map": "/Marketplace-React/static/js/main.1765e90e.chunk.js.map",
+    "runtime-main.js": "/Marketplace-React/static/js/runtime-main.fa34a45b.js",
+    "runtime-main.js.map": "/Marketplace-React/static/js/runtime-main.fa34a45b.js.map",
+    "static/css/2.d9d181e0.chunk.css": "/Marketplace-React/static/css/2.d9d181e0.chunk.css",
+    "static/js/2.f0cd0001.chunk.js": "/Marketplace-React/static/js/2.f0cd0001.chunk.js",
+    "static/js/2.f0cd0001.chunk.js.map": "/Marketplace-React/static/js/2.f0cd0001.chunk.js.map",
+    "static/js/3.6f867076.chunk.js": "/Marketplace-React/static/js/3.6f867076.chunk.js",
+    "static/js/3.6f867076.chunk.js.map": "/Marketplace-React/static/js/3.6f867076.chunk.js.map",
+    "index.html": "/Marketplace-React/index.html",
+    "static/css/2.d9d181e0.chunk.css.map": "/Marketplace-React/static/css/2.d9d181e0.chunk.css.map",
+    "static/css/main.b3371058.chunk.css.map": "/Marketplace-React/static/css/main.b3371058.chunk.css.map",
+    "static/js/2.f0cd0001.chunk.js.LICENSE.txt": "/Marketplace-React/static/js/2.f0cd0001.chunk.js.LICENSE.txt",
+    "static/media/stylesheet.css": "/Marketplace-React/static/media/ProximaNovaCond-ThinIt.caaaec9c.woff",
+    "static/media/style.scss": "/Marketplace-React/static/media/zoom-in.3ebf28db.svg",
+    "static/media/behance.7fc67985.svg": "/Marketplace-React/static/media/behance.7fc67985.svg",
+    "static/media/dribble.6e42bc56.svg": "/Marketplace-React/static/media/dribble.6e42bc56.svg",
+    "static/media/facebook-1.svg": "/Marketplace-React/static/media/facebook-1.921a39a7.svg",
+    "static/media/facebook.56a75a13.svg": "/Marketplace-React/static/media/facebook.56a75a13.svg",
+    "static/media/logo.66980ebb.svg": "/Marketplace-React/static/media/logo.66980ebb.svg",
+    "static/media/pinterest-1.svg": "/Marketplace-React/static/media/pinterest-1.e22872f4.svg",
+    "static/media/pinterst.f9793007.svg": "/Marketplace-React/static/media/pinterst.f9793007.svg",
+    "static/media/share-icon.svg": "/Marketplace-React/static/media/share-icon.32479514.svg",
+    "static/media/sign-in.png": "/Marketplace-React/static/media/sign-in.10803df2.png",
+    "static/media/thumnails-14.svg": "/Marketplace-React/static/media/thumnails-14.0a0c49f0.svg",
+    "static/media/thumnails-5.svg": "/Marketplace-React/static/media/thumnails-5.d9469b15.svg",
+    "static/media/thumnails.svg": "/Marketplace-React/static/media/thumnails.80565453.svg",
+    "static/media/twitter.d880f7dc.svg": "/Marketplace-React/static/media/twitter.d880f7dc.svg",
+    "static/media/welcome-banner.png": "/Marketplace-React/static/media/welcome-banner.fb8a4dec.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.fa34a45b.js",
+    "static/css/2.d9d181e0.chunk.css",
+    "static/js/2.f0cd0001.chunk.js",
+    "static/css/main.b3371058.chunk.css",
+    "static/js/main.1765e90e.chunk.js"
+  ]
+}
