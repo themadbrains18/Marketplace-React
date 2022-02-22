@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/Marketplace-React/static/css/main.1f6b4425.chunk.css",
-    "main.js": "/Marketplace-React/static/js/main.f83c950d.chunk.js",
-    "main.js.map": "/Marketplace-React/static/js/main.f83c950d.chunk.js.map",
-    "runtime-main.js": "/Marketplace-React/static/js/runtime-main.38c0bad9.js",
-    "runtime-main.js.map": "/Marketplace-React/static/js/runtime-main.38c0bad9.js.map",
+    "main.js": "/Marketplace-React/static/js/main.19c7a85f.chunk.js",
+    "main.js.map": "/Marketplace-React/static/js/main.19c7a85f.chunk.js.map",
+    "runtime-main.js": "/Marketplace-React/static/js/runtime-main.377ff7c2.js",
+    "runtime-main.js.map": "/Marketplace-React/static/js/runtime-main.377ff7c2.js.map",
     "static/css/2.d9d181e0.chunk.css": "/Marketplace-React/static/css/2.d9d181e0.chunk.css",
-    "static/js/2.6948049e.chunk.js": "/Marketplace-React/static/js/2.6948049e.chunk.js",
-    "static/js/2.6948049e.chunk.js.map": "/Marketplace-React/static/js/2.6948049e.chunk.js.map",
-    "static/js/3.16e1e4e4.chunk.js": "/Marketplace-React/static/js/3.16e1e4e4.chunk.js",
-    "static/js/3.16e1e4e4.chunk.js.map": "/Marketplace-React/static/js/3.16e1e4e4.chunk.js.map",
+    "static/js/2.cccb1b71.chunk.js": "/Marketplace-React/static/js/2.cccb1b71.chunk.js",
+    "static/js/2.cccb1b71.chunk.js.map": "/Marketplace-React/static/js/2.cccb1b71.chunk.js.map",
+    "static/js/3.28b42305.chunk.js": "/Marketplace-React/static/js/3.28b42305.chunk.js",
+    "static/js/3.28b42305.chunk.js.map": "/Marketplace-React/static/js/3.28b42305.chunk.js.map",
     "index.html": "/Marketplace-React/index.html",
     "static/css/2.d9d181e0.chunk.css.map": "/Marketplace-React/static/css/2.d9d181e0.chunk.css.map",
     "static/css/main.1f6b4425.chunk.css.map": "/Marketplace-React/static/css/main.1f6b4425.chunk.css.map",
-    "static/js/2.6948049e.chunk.js.LICENSE.txt": "/Marketplace-React/static/js/2.6948049e.chunk.js.LICENSE.txt",
+    "static/js/2.cccb1b71.chunk.js.LICENSE.txt": "/Marketplace-React/static/js/2.cccb1b71.chunk.js.LICENSE.txt",
     "static/media/stylesheet.css": "/Marketplace-React/static/media/ProximaNovaCond-ThinIt.caaaec9c.woff",
     "static/media/style.scss": "/Marketplace-React/static/media/zoom-in.3ebf28db.svg",
     "static/media/behance.7fc67985.svg": "/Marketplace-React/static/media/behance.7fc67985.svg",
@@ -32,10 +32,10 @@
     "static/media/welcome-banner.png": "/Marketplace-React/static/media/welcome-banner.fb8a4dec.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.38c0bad9.js",
+    "static/js/runtime-main.377ff7c2.js",
     "static/css/2.d9d181e0.chunk.css",
-    "static/js/2.6948049e.chunk.js",
+    "static/js/2.cccb1b71.chunk.js",
     "static/css/main.1f6b4425.chunk.css",
-    "static/js/main.f83c950d.chunk.js"
+    "static/js/main.19c7a85f.chunk.js"
   ]
 }
