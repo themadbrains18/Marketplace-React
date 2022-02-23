@@ -201,7 +201,7 @@
   transform: translateX(-50%);
   height: 100%;
   z-index: 99999;
-  width: 63%;
+  width: 55%;
 }
 .slider-wrapper-inner.active .swiper-slide-active:hover::after {
   opacity: 0;
@@ -597,7 +597,6 @@ input#password:focus {
   position: relative;
   left: 0;
   text-align: center;
-  bottom: 150px;
   width: 100%;
 }
 
@@ -638,4 +637,38 @@ scrollbar-width: none;  /* Firefox */
     color: #747474;
     margin-top: 40px;
     line-height: 34px;
+}
+
+/* Registration Popup  */
+.social__share__popup__register {
+  background-color: #fff;
+  max-width: 700px;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 12px;
+}
+.social__share__popup__register .sec__content {
+  padding: 30px 64px 40px;
+  .sec__heading {
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 29px;
+  }
+}
+.social__share__popup__register {
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  z-index: 999;
+  display: none;
+}
+
+.email_card-wrapper {
+  margin-top: 50px;
+  display: grid;
+  column-gap: 30px;
+  row-gap: 30px;
 }

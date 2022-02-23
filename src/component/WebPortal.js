@@ -3,7 +3,7 @@ import Header from '../Header-Footer/Header';
 import Footer from '../Header-Footer/Footer';
 // import { WebPortalApi } from "../Api/WebPortalApi";
 const axios = require("axios");
-const {apiurl, imageUrl}= require('../config');
+const {apiurl, imageUrl ,hostName}= require('../config');
 
 const WebPortal = () => {
     const [sliderPopup, setSliderPopup] = useState(false);
@@ -17,7 +17,7 @@ const WebPortal = () => {
     // get Product List data from API
     async function getProductBySubcategory() {
         try {
-            const response = await axios.get(apiurl + "product/getAllBySubcategory/61fcb9a88fa711334c1ad944");
+            const response = await axios.get(apiurl + "product/getAllBySubcategory/web");
             console.log(response.data);
             if(response.data.length>0){
                 setWebPortalApi(response.data);
@@ -50,7 +50,7 @@ const WebPortal = () => {
                             <div className="card-wrapper">
                                 {WebPortalApi.map((val, index) => {
                                     return (
-                                        <a href={val.url} key={index}>
+                                        <a href={hostName + "#/Product/" +val._id+'/'+val.title.split(' ').join('-')} key={index}>
                                             <div className="card-body">
                                                 <picture>
                                                     <img src={imageUrl + val.image} alt="image-description" loading="lazy" />

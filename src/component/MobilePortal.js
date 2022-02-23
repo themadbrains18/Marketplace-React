@@ -3,7 +3,7 @@ import Header from '../Header-Footer/Header';
 import Footer from '../Header-Footer/Footer';
 import { MobilePortalApi } from "../Api/MobilePortalApi";
 const axios = require("axios");
-const {apiurl, imageUrl}= require('../config');
+const {apiurl, imageUrl,hostName}= require('../config');
 
 const MobilePortal = () => {
     const [sliderPopup, setSliderPopup] = useState(false);
@@ -17,7 +17,7 @@ const MobilePortal = () => {
     // get Product List data from API
     async function getProductBySubcategory() {
         try {
-            const response = await axios.get(apiurl + "product/getAllBySubcategory/61fcbb7edd5a7721d0c741ff");
+            const response = await axios.get(apiurl + "product/getAllBySubcategory/mob");
             console.log(response.data);
             if(response.data.length>0){
                 setMobilePortalApi(response.data);
@@ -52,7 +52,7 @@ const MobilePortal = () => {
 
                                 {MobilePortalApi.map((val, index) => {
                                     return (
-                                        <a href={val.url}>
+                                        <a href={hostName + "#/Product/" +val._id+'/'+val.title.split(' ').join('-')} key={index}>
                                             <div class="card-body">
                                                 <picture>
                                                     <img src={imageUrl + val.image} alt="image-description" loading="lazy" />

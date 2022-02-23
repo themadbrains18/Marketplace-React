@@ -3,7 +3,7 @@ const { imageUrl } = require('../config');
 let ProductCard = (props) => {
     let click = ()=>{
         return(
-            props.ClickEvent(props._id)
+            props.ClickEvent(props)
         );
     }
     console.log(props);
@@ -14,7 +14,7 @@ let ProductCard = (props) => {
                 <img src={imageUrl + props.image} loading="lazy" />
             </picture>
             <div className="card-footer">
-                <img src={require(`../assets/svg/thumnails.svg`).default} alt="product logo" />
+                <img src={ props.thumbNail!=''?imageUrl + props.thumbNail: require(`../assets/svg/thumnails.svg`).default} alt="product logo" />
                 <div className="card-txt">
                     <p className="card-info">{props.title}</p>
                     <div className="card-sub-heading-wrapper">
