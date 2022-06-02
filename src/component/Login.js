@@ -9,7 +9,7 @@ const Login = (props) => {
 
     return (
         <>
-            <ToastContainer position="bottom-right" />
+            <ToastContainer position="top-right" />
             <Header />
             <section class="welcome__banner">
                 <div class="container">

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import validator from 'validator';
+import GoogleLogin from 'react-google-login';
+import FacebookLogin from 'react-facebook-login';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const axios = require("axios");
@@ -35,13 +37,13 @@ const Loginpopup = (props) => {
 
         let response = await axios.post(apiurl + 'login', state);
         if (response.data.status == 401) {
-            toast(response.data.message);
+            toast.warn(response.data.message);
         }
         if (response.data.status == 200) {
             localStorage.setItem('access_token', response.data.access_token);
             localStorage.setItem('name', response.data.name);
             localStorage.setItem('email', response.data.username);
-            toast('You have login successfully');
+            toast.success('You have login successfully');
             if (props.productDownloadFile) {
                 setState({ username: '', password: '' });
                 props.completeDownload(response.data.username, response.data.name,response.data.access_token);
@@ -57,10 +59,30 @@ const Loginpopup = (props) => {
 
     const forgetPassword = async (event) => {
         event.preventDefault();
+        event.target.setAttribute('disabled','');
+        event.target.style.opacity=0.2;
         let response = await axios.post(apiurl + 'forgetpassword', {"email": state.email});
 
         console.log(response);
+        event.target.removeAttribute('disabled');
+        event.target.style.opacity=1;
     }
+
+    const responseGoogle = (response) => {
+        console.log(response);
+      }
+
+      const faliourGoogle =(response)=>{
+        console.log(response);
+      }
+
+    const componentClicked =(response)=>{
+        console.log(response)
+    }  
+
+    const responseFacebook =(response)=>{
+        console.log(response)
+    }  
 
     return (
         <>
@@ -68,7 +90,22 @@ const Loginpopup = (props) => {
                 <h2 class="welcome__heading">Welcome to TheMadbrains</h2>
                 <p class="welcome__info">You can log in to your Themadbrains account here.</p>
                 <div class="sign__in__btn">
-                    <button class="google__btn">
+                <GoogleLogin
+                    clientId="610690090130-7jlk36mqpjvi2a2fl0ddmmfet36eabp9.apps.googleusercontent.com"
+                    buttonText="Sign In With Google"
+                    onSuccess={responseGoogle}
+                    onFailure={faliourGoogle}
+                    cookiePolicy={'single_host_origin'}
+                />
+
+                <FacebookLogin
+                    appId="1666340830379253"
+                    autoLoad={true}
+                    fields="name,email,picture"
+                    onClick={componentClicked}
+                    callback={responseFacebook} />
+                
+                    {/* <button class="google__btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 16">
 
                             <g transform="translate(5)">
@@ -83,11 +120,11 @@ const Loginpopup = (props) => {
                                 <path class="b" d="M31.963,0,29.5,0a4.327,4.327,0,0,0-4.557,4.676V6.832H22.464a.387.387,0,0,0-.387.388v3.124a.387.387,0,0,0,.387.387h2.477v7.882a.387.387,0,0,0,.387.387h3.232a.387.387,0,0,0,.387-.387V10.731h2.9a.387.387,0,0,0,.387-.387V7.219a.388.388,0,0,0-.388-.388h-2.9V5c0-.878.209-1.324,1.354-1.324h1.66a.387.387,0,0,0,.387-.387V.391A.388.388,0,0,0,31.963,0Z" transform="translate(-26.077)"></path>
                             </g>
                         </svg>                Sign In With Facebook
-                    </button>
+                    </button> */}
                 </div>
                 <div class="opation">
                     <div class="custom__line"></div>
-                    <div class="opation__txt">
+                    <div class="opation__txt"> 
                         <p>Or</p>
                     </div>
                     <div class="custom__line"></div>

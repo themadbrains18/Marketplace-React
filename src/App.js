@@ -30,6 +30,7 @@ function App() {
           <Route path="/login" component={Login}></Route>
           <Route path="/webportal" component={WebPortal}></Route>
           <Route path="/mobileportal" component={MobilePortal}></Route>
+          <Route path="/callback" component={MobilePortal}></Route>
           <Route path="/users/verifysuccess/:email" component={VerifyEmail}></Route>
           <Route path="/users/forgetpassword/:email" component={ForgetPassword}></Route>
           <Route path= {"/Product/:slug/:name"}  component={ProductDetail}></Route>

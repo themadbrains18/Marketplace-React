@@ -9,7 +9,7 @@ const CreateAccount = () => {
 
     return (
         <>
-            <ToastContainer position="bottom-right" />
+            <ToastContainer position="top-right" />
             <Header />
             <section className="welcome__banner">
                 <div className="container">

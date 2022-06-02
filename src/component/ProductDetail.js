@@ -139,7 +139,7 @@ const ProductDetail = (props) => {
                 if (response.data) {
                     setDownloadPopup(false);
                     setDownloadClick(false);
-                    toast(response.data.message);
+                    toast.warn(response.data.message);
                 }
 
             }
@@ -163,7 +163,7 @@ const ProductDetail = (props) => {
             }
         }
         else {
-            toast('Download file is not available here');
+            toast.warn('Download file is not available here');
             setDownloadClick(false);
         }
 
@@ -184,7 +184,7 @@ const ProductDetail = (props) => {
 
     return (
         <>
-            <ToastContainer position="bottom-right" />
+            <ToastContainer position="top-right" />
             <Header userName={localStorage.getItem('name')} display={sliderPopup || previewPopup || downloadPopup || registerPopup || signinPopup || alertPopup == true ? true : false} />
             <Helmet>
                 <title>{props.match.params.name}</title>
@@ -355,7 +355,13 @@ const ProductDetail = (props) => {
                                     <div className="shot-share-modal-copy-action">
                                         <label htmlFor="copy-url">or copy link</label>
                                         <div className="shot-share-modal-copy-wrapper">
-                                            <input className="shot-share-modal-copy-input" id="copy-url" ref={textAreaRef} type="text" value={`${hostName}/#${props.match.url}`} readOnly="readonly" />
+                                            {ProductItem.link == '' && ProductItem.link == null && ProductItem.link == null && 
+                                                <input className="shot-share-modal-copy-input" id="copy-url" ref={textAreaRef} type="text" value={`${hostName}/#${props.match.url}`} readOnly="readonly" />
+                                            }
+                                            {ProductItem.link != '' && ProductItem.link != null && ProductItem.link != null && 
+                                                <input className="shot-share-modal-copy-input" id="copy-url" ref={textAreaRef} type="text" value={ProductItem.link} readOnly="readonly" />
+                                            }
+                                            
                                             <a className="shot-share-modal-copy-link js-share-clipboard" onClick={copyToClipboard}>Copy</a>
                                         </div>
                                         <label htmlFor="copy-url">{copySuccess}</label>
@@ -449,7 +455,7 @@ const ProductDetail = (props) => {
                         <div className="social__share__popup__register" style={{ display: 'block' }}>
                             <div className="sec__content">
                                 <h2 className="welcome__heading">Your download limit is exceeded. </h2>
-                                <p className="welcome__info">Please perform any action then register on MArket Place.</p>
+                                <p className="welcome__info">Please perform any action then register on Market Place.</p>
                                 <div className="sign__up__txt">
                                     <input class="form__btn" type="submit" style={{ cursor: 'pointer' }} value="Create Account" onClick={() => changeLoginPopup('signup')} />
                                 </div>
